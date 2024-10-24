@@ -8,7 +8,8 @@ namespace Models
 {
     public class Admin : Person
     {
-        
+        public Admin(string namn, int användarID, string lösenord, string roll)
+        : base(namn, användarID, lösenord, roll) { }
 
         public void LäggTillFordon(Fordon fordon)
         {
