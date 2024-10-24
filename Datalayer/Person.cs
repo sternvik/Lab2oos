@@ -12,5 +12,7 @@ namespace Models
         public int AnvändarID { get; set; }
         private string Lösenord { get; set; }
 
-        
+        // Logga in
+
+        // Skapa konto
 }
