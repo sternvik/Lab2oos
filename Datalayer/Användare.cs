@@ -13,9 +13,23 @@ namespace Models
 
         public void RapporteraFordon()
         {
-            
-
-
+            Console.WriteLine("Tillgängliga fordon:");
+            Fordon.VisaAllaFordon();
+        
+            Console.Write("Ange ID på fordonet du vill rapportera som trasigt: ");
+            int id = int.Parse(Console.ReadLine());
+        
+            Fordon fordonAttRapportera = Fordon.FordonLista.Find(f => f.FordonID == id);
+        
+            if (fordonAttRapportera != null)
+            {
+                fordonAttRapportera.Status = "Trasig";
+                Console.WriteLine($"Fordon med ID {id} har rapporterats som trasigt.");
+            }
+            else
+            {
+                Console.WriteLine("Inget fordon hittades med det angivna ID.");
+            }
         }
 
 
