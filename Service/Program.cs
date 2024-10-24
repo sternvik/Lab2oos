@@ -18,7 +18,16 @@ namespace Service
 
             static void Menu()
             {
-                // Switch case logga in
+                int i = 0;
+                switch (i)
+                {
+                    case 1: // Skapa konto
+                        Console.WriteLine(); 
+                        break;
+                    case 2:  // Logga in
+                        Console.WriteLine(); 
+                        break;
+                }
 
             }
 
