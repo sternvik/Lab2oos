@@ -11,7 +11,7 @@ namespace Models
         public Admin(string namn, int användarID, string lösenord, string roll)
         : base(namn, användarID, lösenord, roll) { }
 
-        public void LäggTillFordon(Fordon fordon)
+        public static void LäggTillFordon(Fordon fordon)
         {
             Console.Write("Ange fordonets ID: ");
             string inputId = Console.ReadLine();
@@ -48,7 +48,7 @@ namespace Models
 
         }
 
-        public void TaBortFordon(Fordon fordon)
+        public static void TaBortFordon(Fordon fordon)
         {
             Console.WriteLine("Tillgängliga fordon");
             Fordon.VisaAllaFordon();
@@ -70,7 +70,7 @@ namespace Models
 
         }
 
-        public void UppdateraFordon(Fordon fordon)
+        public static void UppdateraFordon(Fordon fordon)
         {
             Console.WriteLine("Tillgängliga fordon");
             Fordon.VisaAllaFordon();
