@@ -11,6 +11,9 @@ namespace Models
         public string BetalningsMetod { get; set; }
         public List<Hyrning> Hyreshistorik { get; set; }
 
+        public Användare(string namn, int användarID, string lösenord, string roll)
+        : base(namn, användarID, lösenord, roll) { }
+
         public void RapporteraFordon()
         {
             Console.WriteLine("Tillgängliga fordon:");
