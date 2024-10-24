@@ -18,6 +18,7 @@ namespace Service
 
             static void Menu()
             {
+                // Switch case logga in "ahh"
 
             }
 
