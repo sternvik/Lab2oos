@@ -31,5 +31,37 @@
 
 
         }
+        public void MenuAdmin()
+        {
+            Console.WriteLine("Välj en åtgärd:");
+            Console.WriteLine("1: Lägg till fordon");
+            Console.WriteLine("2: Ta bort fordon");
+            Console.WriteLine("3: Uppdatera fordon");
+            Console.WriteLine("4: Avsluta");
+        
+            int i;
+            if (int.TryParse(Console.ReadLine(), out i))
+                switch (i)
+            {
+                case 1:
+                        Admin.LäggTillFordon();
+                    break;
+                case 2:
+                        Admin.TaBortFordon();
+                    break;
+                case 3:
+                        Admin.UppdateraFordon();
+                    break;
+                case 4:
+                        Console.WriteLine("ss");
+                    break;
+            }
+        
+        
+        } 
+        public void MenuAnvändare()
+        {
+            Console.WriteLine("hej använd");
+        }
     }
 }
