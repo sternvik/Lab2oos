@@ -61,11 +61,15 @@ namespace Models
             // Leta efter användare med matchande namn och lösenord.. Denna e skum men de bara att fatta
             Person användare = inMemoryDatabase.personer.Find(p => p.Namn == användarnamn && p.Lösenord == lösenord);
         
-            if (användare != null)
+            if (användare != null && användare.Roll == "Admin")
             {
-                Console.WriteLine($"Inloggad som {användare.Namn}.");
-                Console.WriteLine("");
-                Console.WriteLine("");
+                Console.WriteLine($"Inloggad som {användare.Namn}. Din roll: {användare.Roll}");
+                inMemoryDatabase.MenuAdmin();
+            }
+            // Skicka in admin-instansen
+            else if (användare != null && användare.Roll == "Användare")
+            {
+                inMemoryDatabase.MenuAdmin(); // Skicka in admin-instansen
             }
             else
             {
