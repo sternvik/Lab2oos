@@ -1,7 +1,5 @@
-﻿using System;
+using System;
 using Models;
-
-
 
 namespace Service
 {
@@ -9,28 +7,42 @@ namespace Service
     {
         private static InMemoryDatabase inMemoryDatabase = new InMemoryDatabase();
 
-
         static void Main(string[] args)
         {
-
             inMemoryDatabase.Seed();
             Menu();
+        }
 
-            static void Menu()
+        static void Menu()
+        {
+            Console.WriteLine("Välj ett alternativ:");
+            Console.WriteLine("1. Skapa konto");
+            Console.WriteLine("2. Logga in");
+
+            if (int.TryParse(Console.ReadLine(), out int i))
             {
-                int i = 0;
                 switch (i)
                 {
                     case 1: // Skapa konto
-                        Console.WriteLine(); 
+                        Person.SkapaKonto(inMemoryDatabase);
+                        Menu();
                         break;
-                    case 2:  // Logga in
-                        Console.WriteLine(); 
+
+                    case 2: // Logga in
+                        Person.LoggaIn(inMemoryDatabase);
+                        break;
+
+                    default:
+                        Console.WriteLine("Ogiltigt val. Vänligen försök igen.");
+                        Menu();
                         break;
                 }
-
             }
-
+            else
+            {
+                Console.WriteLine("Ogiltig inmatning. Vänligen ange ett nummer.");
+                Menu();
+            }
         }
     }
 }
