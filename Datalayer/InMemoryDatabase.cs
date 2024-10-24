@@ -13,7 +13,7 @@
 
         public void Seed()
         {
-            Station station1 = new Station(1, "");
+            Station station1 = new Station(1, "MezanGatan");
             Station station2 = new Station(2, "");
             Station station3 = new Station(3, "");
             Station station4 = new Station(4, "");
