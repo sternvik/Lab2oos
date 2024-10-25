@@ -13,7 +13,6 @@ namespace Models
         public string Namn { get; set; }
         public int AnvändarID { get; set; }
         public string Lösenord { get; set; }
-
         public string Roll {  get; set; }
 
         public Person(string namn, int användarID, string lösenord, string roll)
@@ -64,30 +63,31 @@ namespace Models
 
         }
 
-        public static void LoggaIn(InMemoryDatabase inMemoryDatabase)
+        public static void LoggaIn(InMemoryDatabase inMemoryDatabase, List<Station> stationer, List<Fordon> fordonLista)
         {
-
             Console.Write("Skriv in användarnamn: ");
-            string användarnamn = Console.ReadLine(); 
+            string användarnamn = Console.ReadLine();
 
             Console.Write("Skriv in lösenord: ");
             string lösenord = Console.ReadLine();
 
-            // Leta efter användare med matchande namn och lösenord
-            Person användare = inMemoryDatabase.personer.Find(p => p.Namn == användarnamn && p.Lösenord == lösenord);
+            Person inloggadPerson = inMemoryDatabase.personer
+                .Find(p => p.Namn == användarnamn && p.Lösenord == lösenord);
 
-            if (användare != null)
+            if (inloggadPerson != null)
             {
-                Console.WriteLine($"Inloggad som {användare.Namn}. Din roll: {användare.Roll}");
-
-                // Kontrollera rollen och anropa rätt meny
-                if (användare.Roll == "Admin")
+                Console.WriteLine($"Inloggad som {inloggadPerson.Namn}. Din roll: {inloggadPerson.Roll}");
+                if (inloggadPerson.Roll == "Admin")
                 {
-                    inMemoryDatabase.MenuAdmin(); // Anropa Admin-menyn för administratörer
+                    
+                    Admin admin = new Admin(inloggadPerson.Namn, inloggadPerson.AnvändarID, inloggadPerson.Lösenord, inloggadPerson.Roll);
+                    inMemoryDatabase.MenuAdmin(); 
                 }
-                else if (användare.Roll == "Användare")
+                else if (inloggadPerson.Roll == "Användare")
                 {
-                    inMemoryDatabase.MenuAnvändare(); // Anropa en annan meny för användare
+                    
+                    Användare användare = new Användare(inloggadPerson.Namn, inloggadPerson.AnvändarID, inloggadPerson.Lösenord, inloggadPerson.Roll);
+                    inMemoryDatabase.MenuAnvändare(); 
                 }
             }
             else
@@ -95,5 +95,10 @@ namespace Models
                 Console.WriteLine("Felaktigt användarnamn eller lösenord.");
             }
         }
+
+
+
+
+
     }
 }
