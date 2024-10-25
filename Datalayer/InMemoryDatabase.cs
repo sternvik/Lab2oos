@@ -1,67 +1,125 @@
-﻿namespace Models
+
+namespace Models
 {
     public class InMemoryDatabase
     {
+        public List<Fordon> fordon = new List<Fordon>();
+        public List<Station> stationer = new List<Station>();
+        public List<Person> personer = new List<Person>();
+        public List<Hyrning> hyrning = new List<Hyrning>();
+        private Användare inloggadAnvändare;
 
-        public List <Fordon> fordon = new List <Fordon> ();
-        public List <Station> station = new List <Station> ();
-        public List<Användare> användare = new List<Användare> ();
-        public List <Person> personer = new List <Person> ();
-        public List <Hyrning> hyrning = new List <Hyrning> ();
-        public List <Admin> admin = new List <Admin> ();
 
 
         public void Seed()
         {
+            // Exempel på stationer
             Station station1 = new Station(1, "MezanGatan");
-            Station station2 = new Station(2, "");
-            Station station3 = new Station(3, "");
-            Station station4 = new Station(4, "");
+            Station station2 = new Station(2, "b");
+            Station station3 = new Station(3, "c");
+            Station station4 = new Station(4, "d");
+            stationer.Add(station1);
+            stationer.Add(station2);
+            stationer.Add(station3);
+            stationer.Add(station4);
 
-            station.Add(station1);
-            station.Add(station2);
-            station.Add(station3);
-            station.Add(station4);
-            
-            Person person1 = new Person("Anna", 1, "123", "Admin" );
+
+
+            // Exempel på användare (personer)
+            Person person1 = new Person("Anna", 1, "123", "Admin");
             Person person2 = new Person("Erik", 2, "abc", "Användare");
-            
             personer.Add(person1);
             personer.Add(person2);
 
+            // Exempel på fordon kopplade till stationer
+            Fordon fordon1 = new Fordon(1, "Elcykel", 100, "Tillgänglig", station1);
+            Fordon fordon2 = new Fordon(2, "Elscooter", 80, "Tillgänglig", station1);
+            Fordon fordon3 = new Fordon(3, "Elcykel", 90, "Tillgänglig", station2);
+            Fordon fordon4 = new Fordon(4, "Elscooter", 70, "Tillgänglig", station3);
+            Fordon fordon5 = new Fordon(5, "Elcykel", 60, "Tillgänglig", station4);
+            fordon.Add(fordon1);
+            fordon.Add(fordon2);
+            fordon.Add(fordon3);
+            fordon.Add(fordon4);
+            fordon.Add(fordon5);
+
 
         }
+
         public void MenuAdmin()
         {
-            Console.WriteLine("Välj en åtgärd:");
-            Console.WriteLine("1: Lägg till fordon");
-            Console.WriteLine("2: Ta bort fordon");
-            Console.WriteLine("3: Uppdatera fordon");
-            Console.WriteLine("4: Avsluta");
-        
-            int i;
-            if (int.TryParse(Console.ReadLine(), out i))
-                switch (i)
+            bool running = true;
+            while (running)
             {
-                case 1:
-                        Admin.LäggTillFordon();
-                    break;
-                case 2:
-                        Admin.TaBortFordon();
-                    break;
-                case 3:
-                        Admin.UppdateraFordon();
-                    break;
-                case 4:
-                        Console.WriteLine("ss");
-                    break;
+                Console.WriteLine("Välj en åtgärd:");
+                Console.WriteLine("1: Lägg till fordon");
+                Console.WriteLine("2: Uppdatera fordon");
+                Console.WriteLine("3: Ta bort fordon");
+                Console.WriteLine("4: Avsluta");
+                
+
+
+                if (int.TryParse(Console.ReadLine(), out int i))
+                {
+                    switch (i)
+                    {
+                        case 1:
+                            Admin.LäggTillFordon(fordon, stationer);
+                            break;
+                        case 2:
+                            Admin.UppdateraFordon(fordon, stationer);
+                            break;
+                        case 3:
+                            Admin.TaBortFordon(fordon, stationer);
+                            break;
+                        case 4:
+                            running = false; 
+                            break;
+                        default:
+                            Console.WriteLine("Ogiltigt val, försök igen.");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Felaktig inmatning, ange ett nummer.");
+                }
             }
-        
-        
-        } 
+        }
+
+
         public void MenuAnvändare()
         {
-            Console.WriteLine("hej använd");
+            bool running = true;
+            while (running)
+            {
+                Console.WriteLine("Välj en åtgärd:");
+                Console.WriteLine("1: Hyr fordon");
+                Console.WriteLine("2: Visa hyreshistorik");
+                Console.WriteLine("3: Avsluta");
+                
+
+                if (int.TryParse(Console.ReadLine(), out int i))
+                {
+                    switch (i)
+                    {
+                        case 1:
+                            Hyrning.HyraFordon(inloggadAnvändare, stationer);
+                            break;
+                        case 2:
+                            //VisaHyreshistorik(inloggadAnvändare);
+                            break;
+                        case 3:
+                            running = false;
+                            break;
+                        default:
+                            Console.WriteLine("Ogiltigt val, försök igen.");
+                            break;
+                    }
+                }
+            }
         }
+
+        
     }
 }
