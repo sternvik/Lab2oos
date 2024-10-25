@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +17,20 @@ namespace Models
             StationID = id;
             Namn = namn;
             TillgängligaFordon = new List<Fordon>();
+        }
+        public void LäggTillFordon(Fordon fordon)
+        {
+            TillgängligaFordon.Add(fordon);
+        }
+
+        public static void VisaAllaStationer(List<Station> stationer)
+        {
+            Console.WriteLine("Tillgängliga stationer:");
+            Console.WriteLine($"Antal stationer: {stationer.Count}");
+            foreach (var station in stationer)
+            {
+                Console.WriteLine($"ID: {station.StationID}, Namn: {station.Namn}");
+            }
         }
     }
 }
