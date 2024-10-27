@@ -6,9 +6,6 @@ namespace Service
     public class Program
     {
         private static InMemoryDatabase inMemoryDatabase = new InMemoryDatabase();
-        private static Person inloggadAnvändare;
-        private static List<Station> stationer = new List<Station>();
-        private static List<Fordon> fordonLista = new List<Fordon>();
         static void Main(string[] args)
         {
             inMemoryDatabase.Seed();
@@ -31,7 +28,7 @@ namespace Service
                         break;
 
                     case 2: 
-                        Person.LoggaIn(inMemoryDatabase, stationer, fordonLista);
+                        Person.LoggaIn(inMemoryDatabase);
                         break;
 
                     default:
