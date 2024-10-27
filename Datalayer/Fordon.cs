@@ -9,13 +9,11 @@ namespace Models
 {
     public class Fordon
     {
-
-        
         public int FordonID { get; set; }
         public string Typ { get; set; }
         public int BatteriNivå { get; set; }
         public string Status { get; set; }
-        public Station Station { get; private set; }
+        public Station Station { get; set; }
 
         public Fordon(int id, string typ, int batteriNivå, string status, Station station)
         {
@@ -25,11 +23,6 @@ namespace Models
             Status = status;
             Station = station; 
             station.LäggTillFordon(this);
-        }
-
-        public void UppdateraStatus()
-        {
-            
         }
 
         public static void VisaFordonPåStation(Station station)
