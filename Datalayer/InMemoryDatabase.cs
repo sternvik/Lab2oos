@@ -6,18 +6,20 @@ namespace Models
         public List<Fordon> fordon = new List<Fordon>();
         public List<Station> stationer = new List<Station>();
         public List<Person> personer = new List<Person>();
+        public List<Användare> användare = new List<Användare> ();
+        public List<Admin> admin = new List<Admin>();
         public List<Hyrning> hyrning = new List<Hyrning>();
-        private Användare inloggadAnvändare;
+        
 
 
 
         public void Seed()
         {
             // Exempel på stationer
-            Station station1 = new Station(1, "MezanGatan");
-            Station station2 = new Station(2, "b");
-            Station station3 = new Station(3, "c");
-            Station station4 = new Station(4, "d");
+            Station station1 = new Station(1, "Mezangata");
+            Station station2 = new Station(2, "Båtsman Gråsgata");
+            Station station3 = new Station(3, "Båtsman Hisingsgata");
+            Station station4 = new Station(4, "Kåserigatan");
             stationer.Add(station1);
             stationer.Add(station2);
             stationer.Add(station3);
@@ -46,80 +48,5 @@ namespace Models
 
         }
 
-        public void MenuAdmin()
-        {
-            bool running = true;
-            while (running)
-            {
-                Console.WriteLine("Välj en åtgärd:");
-                Console.WriteLine("1: Lägg till fordon");
-                Console.WriteLine("2: Uppdatera fordon");
-                Console.WriteLine("3: Ta bort fordon");
-                Console.WriteLine("4: Avsluta");
-                
-
-
-                if (int.TryParse(Console.ReadLine(), out int i))
-                {
-                    switch (i)
-                    {
-                        case 1:
-                            Admin.LäggTillFordon(fordon, stationer);
-                            break;
-                        case 2:
-                            Admin.UppdateraFordon(fordon, stationer);
-                            break;
-                        case 3:
-                            Admin.TaBortFordon(fordon, stationer);
-                            break;
-                        case 4:
-                            running = false; 
-                            break;
-                        default:
-                            Console.WriteLine("Ogiltigt val, försök igen.");
-                            break;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Felaktig inmatning, ange ett nummer.");
-                }
-            }
-        }
-
-
-        public void MenuAnvändare()
-        {
-            bool running = true;
-            while (running)
-            {
-                Console.WriteLine("Välj en åtgärd:");
-                Console.WriteLine("1: Hyr fordon");
-                Console.WriteLine("2: Visa hyreshistorik");
-                Console.WriteLine("3: Avsluta");
-                
-
-                if (int.TryParse(Console.ReadLine(), out int i))
-                {
-                    switch (i)
-                    {
-                        case 1:
-                            Hyrning.HyraFordon(inloggadAnvändare, stationer);
-                            break;
-                        case 2:
-                            //VisaHyreshistorik(inloggadAnvändare);
-                            break;
-                        case 3:
-                            running = false;
-                            break;
-                        default:
-                            Console.WriteLine("Ogiltigt val, försök igen.");
-                            break;
-                    }
-                }
-            }
-        }
-
-        
     }
 }
